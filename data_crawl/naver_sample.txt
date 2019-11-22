@@ -1,0 +1,34 @@
+{
+    'lastBuildDate': 'Fri, 22 Nov 2019 16:55:14 +0900',
+    'total': 3,
+    'start': 1,
+    'display': 3,
+    'items': [{
+        'title': '<b>모아나</b>누이아케아: 원 오션. 원 피플. 원 카누.',
+        'link': 'https://movie.naver.com/movie/bi/mi/basic.nhn?code=180735',
+        'image': 'https://ssl.pstatic.net/imgmovie/mdi/mit110/1807/180735_P01_155937.jpg',
+        'subtitle': 'MOANANUI&amp;#256;KEA: ONE OCEAN. ONE PEOPLE. ONE CANOE.',
+        'pubDate': '2018',
+        'director': '나알레후 안소니|',
+        'actor': '',
+        'userRating': '0.00'
+    }, {
+        'title': '<b>모아나</b>',
+        'link': 'https://movie.naver.com/movie/bi/mi/basic.nhn?code=130849',
+        'image': 'https://ssl.pstatic.net/imgmovie/mdi/mit110/1308/130849_P18_100628.jpg',
+        'subtitle': 'Moana',
+        'pubDate': '2016',
+        'director': '론 클레멘츠|존 머스커|',
+        'actor': '드웨인 존슨|알란 터딕|아우이 크라발호|저메인 클레멘트|니콜 셰르징거|테무에라 모리슨|레이첼 하우스|',
+        'userRating': '9.16'
+    }, {
+        'title': '<b>모아나</b>',
+        'link': 'https://movie.naver.com/movie/bi/mi/basic.nhn?code=127021',
+        'image': 'https://ssl.pstatic.net/imgmovie/mdi/mit110/1270/127021_P01_174306.jpg',
+        'subtitle': 'Moana',
+        'pubDate': '1926',
+        'director': '로버트 플라어티|프란시스 H. 플래허티|',
+        'actor': '',
+        'userRating': '0.00'
+    }]
+}
