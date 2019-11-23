@@ -32,3 +32,56 @@
         'userRating': '0.00'
     }]
 }
+
+{
+    'lastBuildDate': 'Sat, 23 Nov 2019 15:13:42 +0900',
+    'total': 31,
+    'start': 1,
+    'display': 10,
+    'items': [{
+                'title': '<b>터미네이터</b>: 다크 페이트',
+                'link': 'https://movie.naver.com/movie/bi/mi/basic.nhn?code=167605',
+                'image': 'https://ssl.pstatic.net/imgmovie/mdi/mit110/1676/167605_P40_140111.jpg',
+                'subtitle': 'Terminator: Dark Fate',
+                'pubDate': '2019',
+                'director': '팀 밀러|',
+                'actor': '맥켄지 데이비스|아놀드 슈왈제네거|린다 해밀턴|나탈리아 레이즈|가브리엘 루나|',
+                'userRating': '8.62'
+            }, {
+                'title': '<b>터미네이터</b> 솔저',
+                'link': 'https://movie.naver.com/movie/bi/mi/basic.nhn?code=182623',
+                'image': 'https://ssl.pstatic.net/imgmovie/mdi/mit110/1826/182623_P01_155303.jpg',
+                'subtitle': 'Total Retribution',
+                'pubDate': '2019',
+                'director': '앤드류 벨웨어|',
+                'actor': '',
+                'userRating': '2.66'
+            }, {
+                'title': '<b>터미네이터</b> 사이보그',
+                'link': 'https://movie.naver.com/movie/bi/mi/basic.nhn?code=141088',
+                'image': 'https://ssl.pstatic.net/imgmovie/mdi/mit110/1410/141088_P01_163220.jpg',
+                'subtitle': 'Cyborg X',
+                'pubDate': '2017',
+                'director': 'K. 킹|',
+                'actor': '이브 마우로|로키 마이
+                어스 | 애덤 존슨 | 제이크 스토모언 | 대니 트레조 | ', '
+                userRating ': '
+                3.67 '}, {'
+                title ': '
+                터미테이터 ', '
+                link ': '
+                https: //movie.naver.com/movie/bi/mi/basic.nhn?code=184418', 'image': 'https://ssl.pstatic.net/imgmovie/mdi/mit110/1844/184418_P01_102059.jpg', 'subtitle': 'Termitator', 'pubDate': '2017', 'director': '카미유 
+                    모네트 | ', '
+                actor ': '
+                카미유 모네트 | ', '
+                userRating ': '
+                10.00 '}, {'
+                title ': ' < b > 터미네이터 < /b> 제니시스', 'link': 'https:/ / movie.naver.com / movie / bi / mi / basic.nhn ? code = 69956 ', '
+                image ': '
+                https : //ssl.pstatic.net/imgmovie/mdi/mit110/0699/69956_P63_095853.jpg', 'subtitle': 'Terminator Genisys', 'pubDate': '2015', 'director': '앨런 테일러|', 'actor': '아놀드 슈왈제네거|에밀리아 클라크|제이 코트니|제이슨 클락|J.K. 시몬스|', 'userRating': '7.69'}, {'title': '메가 샤크 <b>터 
+                    미네이터 < /b>', 'link': 'https:/ / movie.naver.com / movie / bi / mi / basic.nhn ? code = 163060 ', '
+                image ': '
+                https: //ssl.pstatic.net/imgmovie/mdi/mit110/1630/163060_P08_101734.jpg', 'subtitle': 'MEGA SHARK vs KOLOSSUS', 'pubDate': '2015', 'director': '크리스토퍼 레이|', 'actor': '일레나 더글라스|에이미 라이더|브로디 허츨러|', 'userRating': '4.67'}, {'title': '익스트림 <b>터미네이터</b>', 'link': 'https://movie.naver.com/movie/bi/mi/basic.nhn?code=132954', 'image': 'https://ssl.pstatic.net/imgmovie/mdi/mit110/1329/132954_P01_155506.jpg', 'subtitle': 'Android Insurrection', 'pubDate': '2012', 'director': '앤드류 벨웨어|', 'actor': '버지니아 로건|', 'userRating': '5.24'}, {'title': '에이리언 <b>터미네이터</b>', 'link': 'https://movie.naver.com/movie/bi/mi/basic.nhn?code=133168', 'image': 'https://ssl.pstatic.net/imgmovie/mdi/mit110/1331/133168_P01_161200.jpg', 'subtitle': 'Metal Shifters', 'pubDate': '2011', 'director': '폴 질러|', 'actor': '카반 스미스|', 'userRating': '2.67'}, {'title': '익스<b>터미네이터</b>', 'link': 'https://movie.naver.com/movie/bi/mi/basic.nhn?code=119894', 'image': '', 'subtitle': 'The Exterminator', 'pubDate': '2011', 'director': '제프리 리 우즈|', 'actor': '안소니 치숌|', 'userRating': '0.00'}, {'title': '<b>터 
+                    미네이터 < /b> 파이널', 'link': 'https:/ / movie.naver.com / movie / bi / mi / basic.nhn ? code = 77619 ', '
+                image ': '
+                https: //ssl.pstatic.net/imgmovie/mdi/mit110/0776/77619_P02_192025.jpg', 'subtitle': 'Terminator Final', 'pubDate': '2010', 'director': '윤상원|', 'actor': '', 'userRating': '8.07'}]}

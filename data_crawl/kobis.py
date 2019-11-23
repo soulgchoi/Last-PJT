@@ -6,26 +6,42 @@ key = 'fb87484ce21fa7529722b4d19c29bfb7'
 req_URL = f'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key={key}'
 
 date = []
-for i in range(20):
+for i in range(520):
     d = datetime(2019, 11, 17) - timedelta(weeks=i)
     date.append(d.strftime('%Y%m%d'))
 
 # URL = req_URL + key + '&targetDt=' + date + '&weekGb=0'
 
-test1 = open('test.csv', 'w', encoding='utf-8', newline='')
+# test1 = open('test.csv', 'w', encoding='utf-8', newline='')
+# fieldnames1 = ['showRange', 'movieNm', 'rank', 'movieCd', 'openDt', 'audiAcc']
+# cw_test1 = csv.DictWriter(test1, fieldnames=fieldnames1)
+# cw_test1.writeheader()
+
+# test2 = open('test2.csv', 'w', encoding='utf-8', newline='')
+# fieldnames2 = ['movieCd']
+# cw_test2 = csv.DictWriter(test2, fieldnames=fieldnames2)
+# cw_test2.writeheader()
+
+# test3 = open('test3.csv', 'w', encoding='utf-8', newline='')
+# fieldnames3 = ['movieNm', 'years']
+# cw_test3 = csv.DictWriter(test3, fieldnames=fieldnames3)
+# cw_test3.writeheader()
+
+
+movies = open('movies.csv', 'w', encoding='utf-8', newline='')
 fieldnames1 = ['showRange', 'movieNm', 'rank', 'movieCd', 'openDt', 'audiAcc']
-cw_test1 = csv.DictWriter(test1, fieldnames=fieldnames1)
-cw_test1.writeheader()
+cw_movies = csv.DictWriter(movies, fieldnames=fieldnames1)
+cw_movies.writeheader()
 
-test2 = open('test2.csv', 'w', encoding='utf-8', newline='')
+moviecodes = open('moviecodes.csv', 'w', encoding='utf-8', newline='')
 fieldnames2 = ['movieCd']
-cw_test2 = csv.DictWriter(test2, fieldnames=fieldnames2)
-cw_test2.writeheader()
+cw_moviecodes = csv.DictWriter(moviecodes, fieldnames=fieldnames2)
+cw_moviecodes.writeheader()
 
-test3 = open('test3.csv', 'w', encoding='utf-8', newline='')
+movienames = open('movienames.csv', 'w', encoding='utf-8', newline='')
 fieldnames3 = ['movieNm', 'years']
-cw_test3 = csv.DictWriter(test3, fieldnames=fieldnames3)
-cw_test3.writeheader()
+cw_movienames = csv.DictWriter(movienames, fieldnames=fieldnames3)
+cw_movienames.writeheader()
 
 res1 = {}
 movie_codes = {}
@@ -46,8 +62,10 @@ for day in date:
         movie_name['movieNm'] = movie.get('movieNm')
         movie_name['years'] = movie.get('openDt')[:4]
         # print(res1)
-        cw_test1.writerow(res1)
-        cw_test2.writerow(movie_codes)
-        cw_test3.writerow(movie_name)
+        cw_movies.writerow(res1)
+        cw_moviecodes.writerow(movie_codes)
+        cw_movienames.writerow(movie_name)
 
-
+movies.close()
+moviecodes.close()
+movienames.close()
