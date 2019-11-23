@@ -13,7 +13,7 @@ User = get_user_model()
 @login_required
 def user_list(request):
     users = User.objects.all()
-    return render(request, '', {
+    return render(request, 'accounts/user_list.html', {
         'users': users,
     })
 

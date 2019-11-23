@@ -74,6 +74,8 @@
   - 일단 accounts 만
     - 모델링; follower 추가
     - form; 회원가입은 일단 id/password/email/firstname/lastname
+    - views
+    - templates 러프
 
 ### 생각할 것
 
