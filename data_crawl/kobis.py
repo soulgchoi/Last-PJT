@@ -12,25 +12,42 @@ for i in range(20):
 
 # URL = req_URL + key + '&targetDt=' + date + '&weekGb=0'
 
-with open('test.csv', 'w', encoding='utf-8', newline='') as f:
-    fieldnames = ['showRange', 'movieNm', 'rank', 'movieCd', 'openDt', 'audiAcc']
-    writer = csv.DictWriter(f, fieldnames=fieldnames)
-    writer.writeheader()
-    result = {}
-    # movie_codes = []
-    for day in date:
-        URL = req_URL + '&targetDt=' + day + '&weekGb=0'
-        # print(URL)
-        data = requests.get(URL).json()
-        data1 = data.get('boxOfficeResult')
-        for movie in data1.get('weeklyBoxOfficeList'):
-            result['showRange'] = data1.get('showRange')
-            result['movieNm'] = movie.get('movieNm')
-            result['rank'] = movie.get('rank')
-            result['movieCd'] = movie.get('movieCd')
-            result['openDt'] = movie.get('openDt')
-            result['audiAcc'] = movie.get('audiAcc')
-            # print(result)
-            writer.writerow(result)
+test1 = open('test.csv', 'w', encoding='utf-8', newline='')
+fieldnames1 = ['showRange', 'movieNm', 'rank', 'movieCd', 'openDt', 'audiAcc']
+cw_test1 = csv.DictWriter(test1, fieldnames=fieldnames1)
+cw_test1.writeheader()
+
+test2 = open('test2.csv', 'w', encoding='utf-8', newline='')
+fieldnames2 = ['movieCd']
+cw_test2 = csv.DictWriter(test2, fieldnames=fieldnames2)
+cw_test2.writeheader()
+
+test3 = open('test3.csv', 'w', encoding='utf-8', newline='')
+fieldnames3 = ['movieNm', 'years']
+cw_test3 = csv.DictWriter(test3, fieldnames=fieldnames3)
+cw_test3.writeheader()
+
+res1 = {}
+movie_codes = {}
+movie_name = {}
+for day in date:
+    URL = req_URL + '&targetDt=' + day + '&weekGb=0'
+    # print(URL)
+    data = requests.get(URL).json()
+    data1 = data.get('boxOfficeResult')
+    for movie in data1.get('weeklyBoxOfficeList'):
+        res1['showRange'] = data1.get('showRange')
+        res1['movieNm'] = movie.get('movieNm')
+        res1['rank'] = movie.get('rank')
+        res1['movieCd'] = movie.get('movieCd')
+        res1['openDt'] = movie.get('openDt')
+        res1['audiAcc'] = movie.get('audiAcc')
+        movie_codes['movieCd'] = movie.get('movieCd')
+        movie_name['movieNm'] = movie.get('movieNm')
+        movie_name['years'] = movie.get('openDt')[:4]
+        # print(res1)
+        cw_test1.writerow(res1)
+        cw_test2.writerow(movie_codes)
+        cw_test3.writerow(movie_name)
 
 
