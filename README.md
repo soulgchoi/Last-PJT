@@ -76,6 +76,7 @@
     - form; 회원가입은 일단 id/password/email/firstname/lastname
     - views
     - templates 러프
+  - movies app 생성
 
 ### 생각할 것
 
@@ -85,3 +86,4 @@
 
 - 박스오피스 기간&순위  <-> movie 관계 설정
 - 마이페이지 설정 (유저 상세 페이지와 별도로)
+- movies 모델링
