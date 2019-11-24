@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
-
+from datetime import datetime
 
 User = get_user_model()
 
@@ -46,6 +46,7 @@ def login(requset):
         if form.is_valid():
             user = form.get_user()
             auth_login(request, user)
+            present = (datetime.year, datetime.month, datetime.day)
             return redirect('')
     else:
         form = CustomAuthenticationForm()
