@@ -10,12 +10,12 @@ req_URL = f'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovi
 # fieldnames = ['genres']
 # cw_test4 = csv.DictWriter(test4, fieldnames=fieldnames)
 # cw_test4.writeheader()
-genres = open('genres2.csv', 'w', encoding='utf-8', newline='')
+genres = open('genres3.csv', 'w', encoding='utf-8', newline='')
 fieldnames = ['genres']
 cw_genres = csv.DictWriter(genres, fieldnames=fieldnames)
 cw_genres.writeheader()
 
-i = 1758
+i = 4759
 movieCd = open('moviecodes2.csv', 'r', encoding='utf-8')
 Cdreader = csv.DictReader(movieCd)
 for row in Cdreader:
