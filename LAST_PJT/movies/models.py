@@ -2,8 +2,10 @@ from django.db import models
 from django.conf import settings
 
 class Boxoffice(models.Model):
-    date = models.
-
+    term_s = models.IntegerField()
+    term_e = models.IntegerField()
+    rank = models.IntegerField()
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
 class Genre(models.Model):
     name = models.CharField(max_length=30)
