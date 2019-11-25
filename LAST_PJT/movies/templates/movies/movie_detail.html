@@ -4,7 +4,11 @@
 {{ movie.title }}
 <ul>
 {% for rating in movie.rating_set.all %}
-    <li>{{ rating.content }}</li>
+    <li>{{ rating.content }}
+        <a href="{% url 'movies:edit_rating' movie.id rating.id %}">
+            <button>수정</button>
+        </a>
+    </li>
 {% endfor %}
 </ul>
 
@@ -12,6 +16,7 @@
 <form method="POST" action="{% url 'movies:create_rating' movie.id%}">
     {% csrf_token %}
     {{ rating_form.as_p }}
+    <input type="submit">
 </form>
 
 {% endblock body %}

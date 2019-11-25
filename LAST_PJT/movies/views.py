@@ -68,7 +68,6 @@ def edit_rating(request, movie_id, rating_id):
             return redirect('movies:movie_detail', movie_id)
     else:
         form = RatingModelForm(instance=rating)
-
     return render(request, 'movies/movie_detail.html', {
         'form': form,
     })

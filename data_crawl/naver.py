@@ -1,6 +1,7 @@
 import requests
 import csv
 from decouple import config
+import time
 
 def send_naver_movie(movie_name):
     BASE_URL = 'https://openapi.naver.com/v1/search/movie.json'
@@ -23,18 +24,18 @@ def send_naver_movie(movie_name):
 # cw_img = csv.DictWriter(img, fieldnames=fieldname)
 # cw_img.writeheader()
 
-names = open('movienames3.csv', 'r', encoding='utf-8')
+names = open('movienames.csv', 'r', encoding='utf-8')
 names_reader = csv.DictReader(names)
 
-img = open('movieimages5.csv', 'w', encoding='utf-8', newline='')
-fieldname = ['poster_url']
+img = open('movieimages_.csv', 'w', encoding='utf-8', newline='')
+fieldname = ['link', 'poster_url']
 cw_img = csv.DictWriter(img, fieldnames=fieldname)
 cw_img.writeheader()
 
-i = 3394
+i = 0
 for name in names_reader:
     movieNm, year = name['movieNm'], name['years']
-
+    time.sleep(0.5)
     data = send_naver_movie(movieNm).get('items')
 
     res = {}
@@ -42,6 +43,7 @@ for name in names_reader:
     for d in data:
         # print(d['title'])
         if f'<b>{movieNm}</b>' == d['title'] and d['pubDate'] == year:
+            res['link'] = d['link']
             res['poster_url'] = d['image']
             break
     cw_img.writerow(res)
