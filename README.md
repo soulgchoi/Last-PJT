@@ -72,6 +72,11 @@
 - project 생성
 - app 생성
   - 일단 accounts 만
+    - 모델링; follower 추가
+    - form; 회원가입은 일단 id/password/email/firstname/lastname
+    - views
+    - templates 러프
+  - movies app 생성
 
 ### 생각할 것
 
@@ -80,3 +85,43 @@
 #### 2. Django
 
 - 박스오피스 기간&순위  <-> movie 관계 설정
+- 마이페이지 설정 (유저 상세 페이지와 별도로)
+- movies 모델링
+
+---
+
+### 11.24 day3
+
+### 프로젝트 진행
+
+#### 1. 데이터 
+
+- 남은 데이터 받기
+  - genre 끝
+
+#### 2. Django
+
+- movies
+  - model
+    - rating
+    - boxoffice 는 기간, 순위를 전부 받고, movie 를 FK 로 갖는다
+  - templates 구상
+  - views 
+    - movie_list 빼고 대충
+
+### 생각할 것
+
+#### 1. 데이터
+
+- 데이터 db 에 넣기
+- csv 그대로, json 파싱하지 않고
+- 네이버에서 poster_url 다시 체크
+
+#### 2. Django
+
+- movie list
+  - 추천 알고리즘
+  - 유저 평점 기반으로 다른 영화 가져오기, id 어떻게?
+  - 현재 날짜 찍기
+    - 찍은 날짜로 박스오피스 > 영화 가져오기
+

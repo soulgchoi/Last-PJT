@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{{ movie.title }}
+<ul>
+{% for rating in movie.rating_set.all %}
+    <li>{{ rating.content }}</li>
+{% endfor %}
+</ul>
+
+
+<form method="POST" action="{% url 'movies:create_rating' movie.id%}">
+    {% csrf_token %}
+    {{ rating_form.as_p }}
+</form>
+
+{% endblock body %}
