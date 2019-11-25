@@ -2,4 +2,6 @@
 
 {% block body %}
     <h5>{{ user_info.username }}</h5>
+    {{ user_info.follower.count }}
+    {{ user_info.following.count}}
 {% endblock body %}
