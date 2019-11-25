@@ -8,6 +8,7 @@ class Genre(models.Model):
 
 class Movie(models.Model):
     title = models.CharField(max_length=30)
+    opendata = models.DateTimeField()
     audience = models.IntegerField()
     poster_url = models.TextField()
     description = models.TextField()
