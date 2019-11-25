@@ -9,7 +9,7 @@
 </ul>
 
 
-<form method="POST" action="{% url 'movies:create_review' movie.id%}">
+<form method="POST" action="{% url 'movies:create_rating' movie.id%}">
     {% csrf_token %}
     {{ rating_form.as_p }}
 </form>
