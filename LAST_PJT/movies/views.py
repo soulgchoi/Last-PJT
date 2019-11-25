@@ -20,19 +20,26 @@ def movie_detail(request, movie_id):
     genres = movie.genres.all()
     return render(request, 'movies/movie_detail.html', {
         'movie': movie,
-        'review_form': review_form,
+        'rating_form': rating_form,
         'is_like': is_like,
         'genres': genres,
     })
 
+
 def movie_list(request):
-    # 박스오피스 순위
-    now = datetime.now()
-    # 추천 알고리즘
-    pass
+    movies = Movie.objects.all()
+    return render(request, 'movies/movie_list.html', {
+        'movies': movies,
+    })
+
+# def movie_list(request):
+#     # 박스오피스 순위
+#     now = datetime.now()
+#     # 추천 알고리즘
+#     pass
 
 
-def recommendation():
+# def recommendation():
     
 
 
@@ -58,11 +65,11 @@ def edit_rating(request, movie_id, rating_id):
         form = RatingModelForm(request.POST, instance=rating)
         if form.is_valid():
             rating = form.save()
-            return redirect('moviedetail')
+            return redirect('movies:movie_detail', movie_id)
     else:
         form = RatingModelForm(instance=rating)
 
-    return render(request, '', {
+    return render(request, 'movies/movie_detail.html', {
         'form': form,
     })
 
