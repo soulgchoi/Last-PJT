@@ -36,33 +36,48 @@ def movie_detail(request, movie_id):
 
 def movie_list(request):
     # 박스오피스 순위
-
     boxoffices = Boxoffice.objects.all()
-
     now = datetime.now()
     date = str(now.month) + str(now.day)
-    # print(date)
-    date_term = ''
+    year = str(now.year)
+    y1_term, y5_term, y10_term = '', '', ''
     for boxoffice in boxoffices:
-        # print(boxoffice.term)
         term_s = int(boxoffice.term[4:8])
         term_e = int(boxoffice.term[13:])
-        # print(term_s)
-        # print(term_e)
+        term_y = int(boxoffice.term[:4])
         if term_s <= int(date) <= term_e:
-            date_term = boxoffice.term
-            # print(date_term)
-    date_movies = Boxoffice.objects.filter(term=date_term)
+            if int(year) - 1 == term_y:
+                y1_term = boxoffice.term
+            elif int(year) - 5 == term_y:
+                y5_term = boxoffice.term
+            elif int(year) - 10 == term_y:
+                y10_term = boxoffice.term
+    y1_movies = Boxoffice.objects.filter(term=y1_term)
+    y5_movies = Boxoffice.objects.filter(term=y5_term)
+    y10_movies = Boxoffice.objects.filter(term=y10_term)
 
     # 랜덤 출력
     num_entities = Movie.objects.all().count()
     rand_entities = random.sample(range(num_entities), 30)
     ran_movies = Movie.objects.filter(id__in=rand_entities)
+
+    user = request.user
+    recommend_movies = ''
+    if user.like_movies.all().exists():
+        user_likes = user.like_movies.all()
+        for like in user_likes:
+            if like.like_users.all().exists():
+                like_users = like.like_users.all()
+                for likeuser in like_users:
+
+
     return render(request, 'movies/movie_list.html', {
-        'date_movies': date_movies,
+        'y1_movies': y1_movies,
+        'y5_movies': y5_movies,
+        'y10_movies': y10_movies,
         'ran_movies': ran_movies,
     })
-# def recommendation():
+
     
 
 

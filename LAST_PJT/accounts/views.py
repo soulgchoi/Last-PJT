@@ -37,8 +37,8 @@ def signup(request):
 
 
 @require_http_methods(['POST', 'GET'])
-def login(requset):
-    if requset.user.is_authenticated:
+def login(request):
+    if request.user.is_authenticated:
         return redirect('accounts:user_list')
 
     if request.method == 'POST':

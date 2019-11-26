@@ -3,16 +3,20 @@
 {% load humanize %}
 
 {% block body %}
-
-{% for date_movie in date_movies %}
-<div class="card" style="width: 8rem;">
-    <img src="{{ date_movie.movie.poster_url }}" class="card-img-top" alt="{{ date_movie.movie.title }}">
-    <div class="card-body">
-        <h5 class="card-title">{{ date_movie.movie.title }}</h5>
-        <a href="{% url 'movies:movie_detail' date_movie.movie.id %}" class="btn btn-primary">상세보기</a>
+<div class="row">
+    {% for y1_movie in y1_movies %}
+    <div class="card col-lg-2" style="width:10rem;">
+        <img src="{{ y1_movie.movie.poster_url }}" class="card-img-top" alt="{{ y1_movie.movie.title }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ y1_movie.movie.title }}</h5>
+            <p class="card-text">{{ y1_movie.term }}</p>
+            <p class="card-text">{{ y1_movie.rank }}</p>
+            <a href="{% url 'movies:movie_detail' y1_movie.movie.id %}" class="btn btn-primary">상세보기</a>
+        </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
+
 
 {% comment %} {% for ran_movie in ran_movies %}
 <div class="card" style="width: 8rem;">
