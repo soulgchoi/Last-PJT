@@ -36,17 +36,32 @@ def movie_detail(request, movie_id):
 
 def movie_list(request):
     # 박스오피스 순위
-    boxoffice = Boxoffice.objects.all()
+
+    boxoffices = Boxoffice.objects.all()
+
     now = datetime.now()
-    date = str(now.year) + str(now.month) + str(now.day)
+    date = str(now.month) + str(now.day)
+    # print(date)
+    date_term = ''
+    for boxoffice in boxoffices:
+        # print(boxoffice.term)
+        term_s = int(boxoffice.term[4:8])
+        term_e = int(boxoffice.term[13:])
+        # print(term_s)
+        # print(term_e)
+        if term_s <= int(date) <= term_e:
+            date_term = boxoffice.term
+            # print(date_term)
+    date_movies = Boxoffice.objects.filter(term=date_term)
+
     # 랜덤 출력
     num_entities = Movie.objects.all().count()
     rand_entities = random.sample(range(num_entities), 30)
     ran_movies = Movie.objects.filter(id__in=rand_entities)
     return render(request, 'movies/movie_list.html', {
+        'date_movies': date_movies,
         'ran_movies': ran_movies,
     })
-
 # def recommendation():
     
 

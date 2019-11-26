@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load humanize %}
+
 {% block body %}
 
-{% for ran_movie in ran_movies %}
+{% for date_movie in date_movies %}
+<div class="card" style="width: 8rem;">
+    <img src="{{ date_movie.movie.poster_url }}" class="card-img-top" alt="{{ date_movie.movie.title }}">
+    <div class="card-body">
+        <h5 class="card-title">{{ date_movie.movie.title }}</h5>
+        <a href="{% url 'movies:movie_detail' date_movie.movie.id %}" class="btn btn-primary">상세보기</a>
+    </div>
+</div>
+{% endfor %}
+
+{% comment %} {% for ran_movie in ran_movies %}
 <div class="card" style="width: 8rem;">
     <img src="{{ ran_movie.poster_url }}" class="card-img-top" alt="{{ ran_movie.title }}">
     <div class="card-body">
@@ -9,6 +22,6 @@
         <a href="{% url 'movies:movie_detail' ran_movie.id %}" class="btn btn-primary">상세보기</a>
     </div>
 </div>
-{% endfor %}
+{% endfor %} {% endcomment %}
 
 {% endblock body %}
