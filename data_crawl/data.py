@@ -28,30 +28,32 @@ import csv
 # data.close()
 # sample2.close()
 
-data = open('movie_중복제거.csv', 'r', encoding='utf-8')
+data = open('movies_fin_fin_fin.csv', 'r', encoding='utf-8')
 reader = csv.DictReader(data)
 
-sample2 = open('movie_id.csv', 'w', encoding='utf-8', newline='')
-fieldnames = ['showRange', 'rank', 'movieNm']
-writer = csv.DictWriter(sample2, fieldnames=fieldnames)
+movie_id = open('movie_id.csv', 'w', encoding='utf-8', newline='')
+fieldnames = ['showRange', 'movieNm', 'movieCd', 'rank', 'movieId']
+writer = csv.DictWriter(movie_id, fieldnames=fieldnames)
 writer.writeheader()
 
-movies = ['start']
-
+# movies = ['start']
+codes = ['0']
 for row in reader:
-    name1 = row['movieNm']
+    code = row['movieCd']
 
-    sample2_res = {}
+    id_res = {}
 
-    if name1 not in movies:
-        movies += [name1]
-    
-    sample2_res['showRange'] = row['showRange']
-    sample2_res['rank'] = row['rank']
-    sample2_res['movieNm'] = movies.index(row['movieNm'])
+    if code not in codes:
+        codes += [code]
 
-    writer.writerow(sample2_res)
+    id_res['showRange'] = row['showRange']
+    id_res['movieNm'] = row['movieNm']
+    id_res['movieCd'] = code
+    id_res['rank'] = row['rank']
+    id_res['movieId'] = codes.index(row['movieCd'])
+
+    writer.writerow(id_res)
 
 
 data.close()
-sample2.close()
+movie_id.close()

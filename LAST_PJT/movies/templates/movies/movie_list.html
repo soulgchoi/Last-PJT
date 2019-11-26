@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
-
 {% block body %}
-    <ul>
-    {% for movie in movies %}
-        <li>
-            {{ movie.title }}
-        </li>
-    {% endfor %}
-    </ul>
+
+{% for ran_movie in ran_movies %}
+<div class="card" style="width: 8rem;">
+    <img src="{{ ran_movie.poster_url }}" class="card-img-top" alt="{{ ran_movie.title }}">
+    <div class="card-body">
+        <h5 class="card-title">{{ ran_movie.title }}</h5>
+        <a href="{% url 'movies:movie_detail' ran_movie.id %}" class="btn btn-primary">상세보기</a>
+    </div>
+</div>
+{% endfor %}
+
 {% endblock body %}

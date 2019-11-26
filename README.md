@@ -167,3 +167,22 @@
 
 ---
 
+### 11.26 day5
+
+### 프로젝트 진행
+
+#### 1. 데이터
+
+- db 에 다 넣었음!
+  - boxoffice `movie = Movie.objects.get(codes=mv['movieCd'])` 로 movie 찾아서 넣기
+  - 모두 `classmethod`를 사용해 `shell_plus` 에서 `objects.create()` 썼음
+- poster url 화질구지
+- 이미지 없는 것 해결할 것
+
+#### 2. Django
+
+- movie list 에 랜덤으로 출력 ( 새로고침 할 때마다 )
+
+#### 3. Templates
+
+- 왜 카드가 정렬이 안될까..

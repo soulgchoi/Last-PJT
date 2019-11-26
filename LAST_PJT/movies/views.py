@@ -3,6 +3,7 @@ from django.views.decorators.http import require_GET, require_POST, require_http
 from django.contrib.auth.decorators import login_required
 
 from datetime import datetime
+import random
 
 from .models import Movie, Genre, Boxoffice, Rating
 from .forms import RatingModelForm
@@ -26,18 +27,25 @@ def movie_detail(request, movie_id):
     })
 
 
-def movie_list(request):
-    movies = Movie.objects.all()
-    return render(request, 'movies/movie_list.html', {
-        'movies': movies,
-    })
-
 # def movie_list(request):
-#     # 박스오피스 순위
-#     now = datetime.now()
-#     # 추천 알고리즘
-#     pass
+#     movies = Movie.objects.all()
+#     return render(request, 'movies/movie_list.html', {
+#         'movies': movies,
+#     })
 
+
+def movie_list(request):
+    # 박스오피스 순위
+    boxoffice = Boxoffice.objects.all()
+    now = datetime.now()
+    date = str(now.year) + str(now.month) + str(now.day)
+    # 랜덤 출력
+    num_entities = Movie.objects.all().count()
+    rand_entities = random.sample(range(num_entities), 30)
+    ran_movies = Movie.objects.filter(id__in=rand_entities)
+    return render(request, 'movies/movie_list.html', {
+        'ran_movies': ran_movies,
+    })
 
 # def recommendation():
     
@@ -85,7 +93,7 @@ def delete_rating(request, movie_id, rating_id):
 
 @login_required
 def like_movie(request, movie_id):
-    movie - get_object_or_404(Movie, id=movie_id)
+    movie = get_object_or_404(Movie, id=movie_id)
     user = request.user
     if movie.like_users.filter(id=user.id).exists():
         movie.like_users.remove(user)

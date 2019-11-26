@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.humanize',
+    'bootstrap4',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -124,3 +126,7 @@ AUTH_USER_MODEL = 'accounts.User'
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'assets'),
+]
