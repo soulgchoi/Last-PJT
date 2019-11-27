@@ -6,13 +6,18 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
 from datetime import datetime
 
+
 User = get_user_model()
 
 
 @require_GET
 # @login_required
 def user_list(request):
+    if not request.user.is_authenticated:
+        return redirect('movies:main')
+
     users = User.objects.all()
+    # users = User.objects.all().order_by('follower'.count)
     return render(request, 'accounts/user_list.html', {
         'users': users,
     })
@@ -31,7 +36,7 @@ def signup(request):
             return redirect('accounts:user_list')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'accounts/form.html', {
+    return render(request, 'accounts/_form.html', {
         'form': form,
     })
 
@@ -42,22 +47,21 @@ def login(request):
         return redirect('accounts:user_list')
 
     if request.method == 'POST':
-        form = CustomAuthenticationForm(request.POST)
+        form = CustomAuthenticationForm(request, request.POST)
         if form.is_valid():
             user = form.get_user()
             auth_login(request, user)
-            present = (datetime.year, datetime.month, datetime.day)
-            return redirect('accounts:user_list')
+            return redirect(request.GET.get('next') or 'accounts:user_list')
     else:
         form = CustomAuthenticationForm()
     return render(request, 'accounts/form.html', {
         'form': form,
     })
 
-
+@login_required
 def logout(request):
     auth_logout(request)
-    return redirect('accounts/form.html')
+    return redirect('accounts:login')
 
 
 @login_required
@@ -65,10 +69,10 @@ def follow(request, user_id):
     follower = request.user
     following = get_object_or_404(User, id=user_id)
     if follower != following:
-        if following.followers.filter(id=follower.id).exists():
-            following.followers.remove(follower)
+        if following.follower.filter(id=follower.id).exists():
+            following.follower.remove(follower)
         else:
-            following.followers.add(follower)
+            following.follower.add(follower)
     return redirect('accounts:user_detail', user_id)
 
 

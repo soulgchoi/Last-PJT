@@ -1,30 +1,36 @@
 {% extends 'base.html' %}
 {% block body %}
-<h2 style="display:inline">{{ user_info.username }}</h2>
-    {% if user != user_info %}
-        <a href="{% url 'accounts:follow' user_info.id %}" style="display:inline;">
-            <button style="border: 0; background: none;">
-                {% if user_info in user.stars.all %}
-                <i class="fas fa-heart fa-lg" style="color:#ed4956"></i>
-                {% else %}
-                <i class="far fa-heart fa-lg" style="color:black;"></i>
-                {% endif %}
-            </button>
+<h1 class="ui header">{{ user_info.username }}</h1>
+{% if user != user_info %}
+    <div class="ui labeled button" tabindex="0">
+        <div class="ui grey button">
+        <a href="{% url 'accounts:follow' user_info.id %}" style="color: white;"> 
+            {% if user_info in user.following.all %}
+                <i class="ui user icon"></i>
+                Followed
+            {% else %}
+                <i class="ui outline user icon"></i>
+                Follow
+            {% endif %}
+            </a>
+        </div>
+        <a class="ui basic grey left basic label">
+            {{ user_info.follower.count}}
         </a>
-    {% endif %}
-    <hr>
-    <h5>Like Movies</h5>
-    <hr>
-    {% for movie in user_info.like_movies.all  %}
-        <li>
-            <a style="text-decoration: none" href="{% url 'movies:movie_detail' movie.id %}">{{ movie.title }}</li></a>
-    {% endfor %}
-    <hr>
-    <h5>Reviews</h5>
-    {% for review in reviews %}
-        <li>{{ review.movie.title}}:  {{ review.content }} ({{ review.score }})</li></a>
-    {% endfor %}
-    <hr>
-    <h5>Follow</h5>
-    <p>팔로워 {{ user_info.fans.count }} | 팔로우 {{ user_info.stars.count }}</p>
+    </div>
+{% endif %}
+<hr>
+<h2 class="ui header">Like Movies</h5>
+{% for movie in user_info.like_movies.all  %}
+    <li>
+        <a style="text-decoration: none" href="{% url 'movies:movie_detail' movie.id %}">{{ movie.title }}
+        </a>
+    </li>
+{% endfor %}
+<hr>
+<h2 class="ui header">Reviews</h5>
+{% for review in reviews %}
+<li>{{ review.movie.title}}: {{ review.content }} ({{ review.score }})</li></a>
+{% endfor %}
+
 {% endblock body %}

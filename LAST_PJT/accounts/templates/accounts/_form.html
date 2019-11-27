@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<form class="form-signin" action="" method="post">
+    {% csrf_token %}
+        <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="form.id_username" class="sr-only">Email address</label>
+        <input type="text" id="form.id_username" class="form-control" name="{{ form.username.html_name}}" placeholder="Email address" required autofocus>
+        <label for="form.id_password" class="sr-only">Password</label>
+        <input type="password" id="form.id_password" class="form-control" placeholder="Password" required name="{{ form.password.html_name}}">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+</form>
+<form class="ui form">
+    {% csrf_token %}
+    <h4 class="ui dividing header">Shipping Information</h4>
+    <div class="field">
+        <label>Password</label>
+        <div class="two fields">
+        <div class="field">
+            <input type="password" name="shipping[first-name]" placeholder="비밀번호를 입력하세요.">
+        </div>
+        <div class="field">
+            <input type="password" name="shipping[last-name]" placeholder="비밀번호를 한 번 더 입력하세요.">
+        </div>
+        </div>
+    </div>
+    <div class="field">
+        <label>Billing Address</label>
+        <div class="fields">
+        <div class="twelve wide field">
+            <input type="text" name="shipping[address]" placeholder="Street Address">
+        </div>
+        <div class="four wide field">
+            <input type="text" name="shipping[address-2]" placeholder="Apt #">
+        </div>
+        </div>
+    </div>
+</form>
+    
+{% endblock body %}
+

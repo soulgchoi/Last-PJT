@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <ul class="list-group list-group-flush">
-        {% for user in users %}
-            <li class="list-group-item">
-                <a style="text-decoration: none" href="{% url 'accounts:user_detail' user.id %}">
-                    {{ user.username }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+
+<div class="ui big middle aligned selection divided list">
+    {% for user in users %}
+    <div class="item">
+        <div class="content">
+            <div class="header"></div>
+            <i class="ui fas fa-user"></i>
+            <a style="text-decoration: none; color: #2E2E2E;" href="{% url 'accounts:user_detail' user.id %}">
+                {{user.username}}
+            </a>
+            <div class="right floated">
+                <i class="heart icon red"></i>
+                {{ user.follower.count}}
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
 {% endblock body %}

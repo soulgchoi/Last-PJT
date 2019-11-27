@@ -1,31 +1,51 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load humanize %}
+{% block title %}
+
+{% endblock title %}
 
 {% block body %}
-<div class="row">
-    {% for y1_movie in y1_movies %}
-    <div class="card col-lg-2" style="width:10rem;">
-        <img src="{{ y1_movie.movie.poster_url }}" class="card-img-top" alt="{{ y1_movie.movie.title }}">
-        <div class="card-body">
-            <h5 class="card-title">{{ y1_movie.movie.title }}</h5>
-            <p class="card-text">{{ y1_movie.term }}</p>
-            <p class="card-text">{{ y1_movie.rank }}</p>
-            <a href="{% url 'movies:movie_detail' y1_movie.movie.id %}" class="btn btn-primary">상세보기</a>
+
+<div class="ui link cards">
+    {% for rcmmd_movie in rcmmd_movies %}
+    <div class="ui grey special card">
+        <div class="blurring dimmable image">
+            <div class="ui dimmer">
+                <div class="content">
+                    <div class="center">
+                        <div class="ui inverted button">Add Friend</div>
+                    </div>
+                </div>
+            </div>
+            <img src="{{ rcmmd_movie.poster_url }}" alt="{{ rcmmd_movie.title }}">
+        </div>
+        <div class="content">
+            <div class="header">{{ rcmmd_movie.title }}</div>
+            <div class="meta">
+                {{ rcmmd_movie.opendate }}
+            </div>
+        </div>
+        <div class="content">
+            <span class="right floated">
+                <i class="heart red icon"></i>
+                {{ rcmmd_movie.like_users.count }} like
+            </span>
+            <i class="comment icon"></i>
+            {{ rcmmd_movie.rating_set.all.count }} comments
         </div>
     </div>
     {% endfor %}
 </div>
 
-
-{% comment %} {% for ran_movie in ran_movies %}
-<div class="card" style="width: 8rem;">
-    <img src="{{ ran_movie.poster_url }}" class="card-img-top" alt="{{ ran_movie.title }}">
-    <div class="card-body">
-        <h5 class="card-title">{{ ran_movie.title }}</h5>
-        <a href="{% url 'movies:movie_detail' ran_movie.id %}" class="btn btn-primary">상세보기</a>
-    </div>
-</div>
-{% endfor %} {% endcomment %}
-
 {% endblock body %}
+
+{% block script %}
+
+<script>
+    $('.special.cards .image').dimmer({
+    on: 'hover'
+    });
+</script>
+
+{% endblock script %}

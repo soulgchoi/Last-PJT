@@ -14,6 +14,9 @@ from .forms import RatingModelForm
 # movie_list > 날짜별 박스오피스
 # movie_list2 > 추천 알고리즘
 
+def main(request):
+    return render(request, 'movies/mainpage.html')
+
 def movie_detail(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     rating_form = RatingModelForm()
@@ -27,14 +30,10 @@ def movie_detail(request, movie_id):
     })
 
 
-# def movie_list(request):
-#     movies = Movie.objects.all()
-#     return render(request, 'movies/movie_list.html', {
-#         'movies': movies,
-#     })
-
-
 def movie_list(request):
+    if not request.user.is_authenticated:
+        return redirect('movies:main')
+
     # 박스오피스 순위
     boxoffices = Boxoffice.objects.all()
     now = datetime.now()
@@ -58,29 +57,37 @@ def movie_list(request):
 
     # 랜덤 출력
     num_entities = Movie.objects.all().count()
-    rand_entities = random.sample(range(num_entities), 30)
+    rand_entities = random.sample(range(num_entities), 10)
     ran_movies = Movie.objects.filter(id__in=rand_entities)
 
-    user = request.user
+    # 추천 알고리즘
+    user = request.user  # 유저가
     recommend_movies = ''
-    if user.like_movies.all().exists():
-        user_likes = user.like_movies.all()
+    rcmmd_movies = []
+    if user.like_movies.all().exists():  # 좋아하는 영화가 있으면
+        user_likes = user.like_movies.all()  # 그 영화들
         for like in user_likes:
-            if like.like_users.all().exists():
+            if like.like_users.all().exists():  # 을 좋아하는 다른 유저들
                 like_users = like.like_users.all()
-                for likeuser in like_users:
-
+                for likeuser in like_users:  # 이 좋아하는 다른 영화
+                    rcmmd_movies += likeuser.like_movies.all()
+        res = ''
+    ids = []
+    for rcmmd in rcmmd_movies:
+        ids += [rcmmd.id]
+    # if len(ids) < 20:
+    #     ids += random.sample(range(num_entities), 20-len(ids))
+    res = Movie.objects.filter(id__in=ids[:11])
 
     return render(request, 'movies/movie_list.html', {
         'y1_movies': y1_movies,
         'y5_movies': y5_movies,
         'y10_movies': y10_movies,
         'ran_movies': ran_movies,
+        'rcmmd_movies': res,
     })
 
     
-
-
 
 @login_required
 @require_POST
