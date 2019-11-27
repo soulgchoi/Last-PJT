@@ -7,7 +7,87 @@
 
 {% block body %}
 
-<div class="ui link cards">
+<h2 class="ui dividing header">1년 전 오늘의 영화 순위</h2>
+<div class="ui link five cards">
+    {% for y1_movie in y1_movies %}
+    <div class="ui special grey card">
+        <div class="blurring dimmable image">
+            <img src="{{ y1_movie.movie.poster_url }}" alt="{{ y1_movie.movie.title }}">
+        </div>
+        <div class="content">
+            <div class="ui tiny header">{{ y1_movie.movie.title }}</div>
+        </div>
+        
+        <div class="content">
+        
+            <i class="film icon"></i>
+            {{ y1_movie.term }}
+            <i class="trophy yellow icon"></i>
+            {{ y1_movie.rank }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h2 class="ui dividing header">5년 전 오늘의 영화 순위</h2>
+<div class="ui link five cards">
+    {% for y5_movie in y5_movies %}
+    <div class="ui special grey card">
+        <div class="blurring dimmable image">
+            <img src="{{ y5_movie.movie.poster_url }}" alt="{{ y5_movie.movie.title }}">
+        </div>
+        <div class="content">
+            <div class="ui tiny header">{{ y5_movie.movie.title }}</div>
+        </div>
+        
+        <div class="content">
+        
+            <i class="film icon"></i>
+            {{ y5_movie.term }}
+            <i class="trophy yellow icon"></i>
+            {{ y5_movie.rank }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+<h1 class="dividing"></h1>
+<h2 class="ui dividing header">랜덤</h2>
+<div class="ui link five cards">
+    {% for ran_movie in ran_movies %}
+    <div class="ui grey special card">
+        <div class="blurring dimmable image">
+            <div class="ui dimmer">
+                <div class="content">
+                    <div class="center">
+                        <div class="ui inverted button">Add Friend</div>
+                    </div>
+                </div>
+            </div>
+            <img src="{{ ran_movie.poster_url }}" alt="{{ ran_movie.title }}">
+        </div>
+        <div class="content">
+            <div class="header">{{ ran_movie.title }}</div>
+            <div class="meta">
+                {{ ran_movie.opendate }}
+            </div>
+        </div>
+        <div class="content">
+            <span class="right floated">
+                <i class="heart red icon"></i>
+                {{ ran_movie.like_users.count }} like
+            </span>
+            <i class="comment icon"></i>
+            {{ ran_movie.rating_set.all.count }} comments
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="ui link five cards">
     {% for rcmmd_movie in rcmmd_movies %}
     <div class="ui grey special card">
         <div class="blurring dimmable image">

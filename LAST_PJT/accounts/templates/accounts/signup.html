@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+{% comment %} <form class="form-signin" action="" method="post">
+    {% csrf_token %}
+        <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="form.id_username" class="sr-only">Email address</label>
+        <input type="text" id="form.id_username" class="form-control" name="{{ form.username.html_name}}" placeholder="Email address" required autofocus>
+        <label for="form.id_password" class="sr-only">Password</label>
+        <input type="password" id="form.id_password" class="form-control" placeholder="Password" required name="{{ form.password.html_name}}">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+</form> {% endcomment %}
+<form class="ui form" method="POST">
+    {% csrf_token %}
+    <h1 class="ui dividing header">Signup</h1>
+    <div class="field">
+        <label for="form.username">Username</label>
+        <input type="text" id="form.username" name="username" class="form-control" required placeholder="Username">
+    </div>
+    <div class="field">
+        <label>Name</label>
+        <div class="two fields">
+        <div class="field">
+            <label for="form.first_name" class="sr-only"></label>
+            <input type="text" id="form.first_name" name="first_name" class="form-control" placeholder="First Name">
+        </div>
+        <div class="field">
+            <label for="form.last_name" class="sr-only"></label>
+            <input type="text" id="form.last_name" name="last_name" class="form-control"placeholder="Last Name">
+        </div>
+        </div>
+    </div>
+    <div class="field">
+        <label>Password</label>
+        <div class="two fields">
+        <div class="field">
+            <label for="form.password" ckass="sr-only"></label>
+            <input type="password" id="form.password" name="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="field">
+            <label for="form.password2" class="sr-only"></label>
+            <input type="password" id="form.password2" name="password2" class="form-control" placeholder="Please check password">
+        </div>
+        </div>
+    </div>
+    <div class="field">
+        <label for="form.email">Email</label>
+        <input type="text" id="form.email" name="email" class="form-control" placeholder="sample@ssafy.com">
+    </div>
+    <button class="ui right floated button" type="submit">Submit</button>
+</form>
+    
+{% endblock body %}
+

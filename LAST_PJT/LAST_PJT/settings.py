@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'semanticuiform',
     'django.contrib.humanize',
     'bootstrap4',
     'django_extensions',

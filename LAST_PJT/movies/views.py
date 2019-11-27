@@ -7,12 +7,7 @@ import random
 
 from .models import Movie, Genre, Boxoffice, Rating
 from .forms import RatingModelForm
-# Create your views here.
 
-
-# movie detail
-# movie_list > 날짜별 박스오피스
-# movie_list2 > 추천 알고리즘
 
 def main(request):
     return render(request, 'movies/mainpage.html')
@@ -31,8 +26,8 @@ def movie_detail(request, movie_id):
 
 
 def movie_list(request):
-    if not request.user.is_authenticated:
-        return redirect('movies:main')
+    # if not request.user.is_authenticated:
+    #     return redirect('movies:main')
 
     # 박스오피스 순위
     boxoffices = Boxoffice.objects.all()
@@ -51,27 +46,27 @@ def movie_list(request):
                 y5_term = boxoffice.term
             elif int(year) - 10 == term_y:
                 y10_term = boxoffice.term
-    y1_movies = Boxoffice.objects.filter(term=y1_term)
-    y5_movies = Boxoffice.objects.filter(term=y5_term)
-    y10_movies = Boxoffice.objects.filter(term=y10_term)
+    y1_movies = Boxoffice.objects.filter(term=y1_term)[:5]
+    y5_movies = Boxoffice.objects.filter(term=y5_term)[:5]
+    y10_movies = Boxoffice.objects.filter(term=y10_term)[:5]
 
     # 랜덤 출력
     num_entities = Movie.objects.all().count()
-    rand_entities = random.sample(range(num_entities), 10)
+    rand_entities = random.sample(range(num_entities), 5)
     ran_movies = Movie.objects.filter(id__in=rand_entities)
 
     # 추천 알고리즘
     user = request.user  # 유저가
     recommend_movies = ''
     rcmmd_movies = []
-    if user.like_movies.all().exists():  # 좋아하는 영화가 있으면
-        user_likes = user.like_movies.all()  # 그 영화들
-        for like in user_likes:
-            if like.like_users.all().exists():  # 을 좋아하는 다른 유저들
-                like_users = like.like_users.all()
-                for likeuser in like_users:  # 이 좋아하는 다른 영화
-                    rcmmd_movies += likeuser.like_movies.all()
-        res = ''
+    # if user.like_movies.all().exists():  # 좋아하는 영화가 있으면
+    #     user_likes = user.like_movies.all()  # 그 영화들
+    #     for like in user_likes:
+    #         if like.like_users.all().exists():  # 을 좋아하는 다른 유저들
+    #             like_users = like.like_users.all()
+    #             for likeuser in like_users:  # 이 좋아하는 다른 영화
+    #                 rcmmd_movies += likeuser.like_movies.all()
+    #     res = ''
     ids = []
     for rcmmd in rcmmd_movies:
         ids += [rcmmd.id]

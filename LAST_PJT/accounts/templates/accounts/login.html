@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<form class="ui form" method="POST">
+    {% csrf_token %}
+    <h1 class="ui dividing header">Login</h1>
+    <div class="field">
+        <label for="form.username">Username</label>
+        <input type="text" id="form.username" name="username" class="form-control" required placeholder="Username">
+    </div>
+    <div class="field">
+        <label>Password</label>
+        <div class="field">
+            <label for="form.password" ckass="sr-only"></label>
+            <input type="password" id="form.password" name="password" class="form-control" placeholder="Password">
+        </div>
+    </div>
+    <button class="ui button" type="submit">Submit</button>
+</form>
+    
+{% endblock body %}
+
