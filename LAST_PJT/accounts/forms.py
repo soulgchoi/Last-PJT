@@ -25,10 +25,12 @@ class CustomUserCreationForm(forms.ModelForm):
         }
 
 
-class CustomAuthenticationForm(AuthenticationForm):
+class CustomAuthenticationForm(forms.ModelForm):
+    username = forms.CharField(min_length=2, max_length=12, required=True)
+    password = forms.CharField(min_length=8, max_length=20, required=True)
     class Meta:
         model = User
-        fields = ('username', )
+        fields = ('username', 'password',)
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),

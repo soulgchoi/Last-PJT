@@ -1,1 +1,67 @@
 {% extends 'base.html' %}
+
+{% block nav %}
+<div class="ui huge secondary pointing menu">
+    <a class="item active" href="{% url 'movies:main' %}">
+        Home
+    </a>
+    <a class="item" href="{% url 'movies:movie_list' %}">
+        Movies
+    </a>
+    <a class="item" href={% url 'accounts:user_list' %}>
+        Users
+    </a>
+
+    <div class="right menu">
+        {% if user.is_authenticated %}
+        <a href="{% url 'accounts:user_detail' user.id %}" class="ui item">
+            {{ user.username }}
+        </a>
+        <a class="ui item" href="{% url 'accounts:logout' %}">
+            Logout
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock nav %}
+
+{% block body %}
+{% if user.is_authenticated %}
+    <div class="ui placeholder segment">
+    <div class="ui icon header">
+        <i class="film icon"></i>
+        Welcome!
+    </div>
+    </div>
+{% else %}
+
+<div class="ui placeholder segment">
+    <div class="ui two column very relaxed stackable grid">
+        <div class="middle aligned column">
+            <a href="{% url 'accounts:signup' %}">
+                <div class="ui big button">
+                    <i class="signup icon"></i>
+                    Signup
+                </div>
+            </a>
+        </div>
+        <div class="middle aligned column">
+            <a href="{% url 'accounts:login' %}">
+                <div class="ui big button">
+                    <i class="edit outline icon"></i>
+                    Login
+                </div>
+            </a>
+        </div>
+
+    </div>
+    <div class="ui vertical divider">
+        Or
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock body %}

@@ -1,0 +1,27 @@
+{% block menu %}
+
+<div class="ui placeholder segment">
+  <div class="ui two column very relaxed stackable grid">
+    <div class="middle aligned column">
+      <a href="{% url 'accounts:login' %}">
+        <div class="ui big button">
+          <i class="address card icon"></i>
+          Login
+        </div>
+      </a>
+    </div>
+    <div class="middle aligned column">
+      <a href="{% url 'accounts:signup' %}">
+        <div class="ui big button">
+          <i class="signup icon"></i>
+          Signup
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="ui vertical divider">
+    Or
+  </div>
+</div>
+
+{% endblock menu %}

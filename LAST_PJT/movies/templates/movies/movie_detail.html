@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+
+{% block nav %}
+{% include 'movies/_movies.html' %}
+{% endblock nav %}
 {% load humanize %}
 
 {% block title %}
@@ -7,71 +10,83 @@
 
 {% block body %}
 
+<div class="ui segment">
 
-<div class="card mb-3" style="max-width: 5000px;">
-    <div class="row no-gutters">
-        <div class="col-md-4">
-            <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" style="width: 300px;" />
-        </div>
+    <div class="col-md-4">
+        <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" style="width: 300px;" />
+    </div>
 
-        <div class="col-md-8">
-            <div class="card-body">
-                <div>
-                    <h5 class="card-title" style="display:inline;">{{ movie.title }}</h5>
-                    <form action="{% url 'movies:like_movie' movie.id %}" method="POST" style="display:inline;">
+    <h1 class="header">{{ movie.title }}</h1>
+    <form action="{% url 'movies:like_movie' movie.id %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button style="border: 0; background: none;">
+            {% if is_like %}
+            <i class="fas fa-heart fa-lg" style="color:#ed4956"></i>
+            {% else %}
+            <i class="far fa-heart fa-lg" style="color:black;"></i>
+            {% endif %}
+        </button>
+    </form>
+    <div class="ui clearing divider"></div>
+
+
+
+    <p class="card-text">
+        <p>누적 관객수 : {{ movie.audience|intcomma }} | 장르 : {% for genre in genres %}{{ genre.name }} {% endfor %}</p>
+        <p>{{ movie.opendate }}</p>
+        <p>{{ movie.description_head }}</p>
+        <p>{{ movie.description }}</p>
+    </p>
+
+    <div class="card-text">
+        <ul>
+            {% for rating in movie.rating_set.all %}
+            <li>
+                <div class="text-muted">
+                    <strong>{{ rating.user }}: </strong>
+                    {{ rating.content }} ({{ rating.score }})
+
+                    {% if user == rating.user %}
+                    <form style="display:inline;" action="{% url 'movies:delete_rating' movie.id rating.id %}"
+                        method="POST">
                         {% csrf_token %}
-                        <button style="border: 0; background: none;">
-                            {% if is_like %}
-                            <i class="fas fa-heart fa-lg" style="color:#ed4956"></i>
-                            {% else %}
-                            <i class="far fa-heart fa-lg" style="color:black;"></i>
-                            {% endif %}
+                        <button style="padding:0; border:none; background:none;">
+                            <i class="fas fa-trash"></i>
                         </button>
                     </form>
                 </div>
-
-                <p class="card-text">
-                    <p>누적 관객수 : {{ movie.audience|intcomma }} | 장르 : {% for genre in genres %}{{ genre.name }} {% endfor %}</p>
-                    <p>{{ movie.opendate }}</p>
-                    <p>{{ movie.description_head }}</p>
-                    <p>{{ movie.description }}</p>
-                </p>
-
-                <div class="card-text">
-                    <ul>
-                        {% for rating in movie.rating_set.all %}
-                        <li>
-                            <div class="text-muted">
-                                <strong>{{ rating.user }}: </strong>
-                                {{ rating.content }} ({{ rating.score }})
-
-                                {% if user == rating.user %}
-                                <form style="display:inline;"
-                                    action="{% url 'movies:delete_rating' movie.id rating.id %}" method="POST">
-                                    {% csrf_token %}
-                                    <button style="padding:0; border:none; background:none;">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </div>
-                            {% endif %}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                {% if request.user.is_authenticated %}
-                <form method="POST" action="{% url 'movies:create_rating' movie.id%}">
-                    {% csrf_token %}
-                    {% bootstrap_form rating_form %}
-                    {% buttons %}
-                    <button class="btn btn-info">제출</button>
-                    {% endbuttons %}
-                </form>
                 {% endif %}
-            </div>
-        </div>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-</div>
-</div>
-{% endblock body %}
+
+    
+    <div class="ui comments">
+        <h3 class="ui dividing header">Comments</h3>
+        {% for rating in movie.rating_set.all %}
+        <div class="comment">
+
+            <div class="content">
+                <a class="author">{{ rating.user }}</a>
+                <div class="text">
+                    {{ rating.content }}
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+        {% if request.user.is_authenticated %}
+        <form class="ui reply form" method="POST">
+            {% csrf_token %}
+            <div class="field">
+            <textarea></textarea>
+            </div>
+            <div class="ui blue labeled submit icon button">
+            <i class="icon edit"></i> Add Reply
+            </div>
+        </form>
+        {% endif %}
+    </div>
+    
+    {% endblock body %}

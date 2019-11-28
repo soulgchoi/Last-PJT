@@ -26,8 +26,8 @@ def movie_detail(request, movie_id):
 
 
 def movie_list(request):
-    # if not request.user.is_authenticated:
-    #     return redirect('movies:main')
+    if not request.user.is_authenticated:
+        return redirect('movies:main')
 
     # 박스오피스 순위
     boxoffices = Boxoffice.objects.all()
@@ -50,35 +50,38 @@ def movie_list(request):
     y5_movies = Boxoffice.objects.filter(term=y5_term)[:5]
     y10_movies = Boxoffice.objects.filter(term=y10_term)[:5]
 
-    # 랜덤 출력
-    num_entities = Movie.objects.all().count()
-    rand_entities = random.sample(range(num_entities), 5)
-    ran_movies = Movie.objects.filter(id__in=rand_entities)
-
     # 추천 알고리즘
     user = request.user  # 유저가
     recommend_movies = ''
     rcmmd_movies = []
-    # if user.like_movies.all().exists():  # 좋아하는 영화가 있으면
-    #     user_likes = user.like_movies.all()  # 그 영화들
-    #     for like in user_likes:
-    #         if like.like_users.all().exists():  # 을 좋아하는 다른 유저들
-    #             like_users = like.like_users.all()
-    #             for likeuser in like_users:  # 이 좋아하는 다른 영화
-    #                 rcmmd_movies += likeuser.like_movies.all()
-    #     res = ''
+    if user.like_movies.all().exists():  # 좋아하는 영화가 있으면
+        user_likes = user.like_movies.all()  # 그 영화들
+        for like in user_likes:
+            if like.like_users.all().exists():  # 을 좋아하는 다른 유저들
+                like_users = like.like_users.all()
+                for likeuser in like_users:  # 이 좋아하는 다른 영화
+                    rcmmd_movies += likeuser.like_movies.all()
+    res = ''
     ids = []
     for rcmmd in rcmmd_movies:
         ids += [rcmmd.id]
-    # if len(ids) < 20:
-    #     ids += random.sample(range(num_entities), 20-len(ids))
-    res = Movie.objects.filter(id__in=ids[:11])
+    if len(ids) < 10:  # 가 열개보다 적으면
+        num_entities = Movie.objects.all().count()
+        rand_entities = random.sample(range(num_entities), 10-len(ids))  # 적은 만큼 랜덤으로
+        ids += rand_entities
+        res = Movie.objects.filter(id__in=ids)
+    else:
+        rand_rcmm = random.sample(ids, 10)  # 아니면 그 중에 열개
+        res = Movie.objects.filter(id__in=rand_rcmm)
+
+    # 랜덤 출력
+
 
     return render(request, 'movies/movie_list.html', {
         'y1_movies': y1_movies,
         'y5_movies': y5_movies,
         'y10_movies': y10_movies,
-        'ran_movies': ran_movies,
+        # 'ran_movies': ran_movies,
         'rcmmd_movies': res,
     })
 

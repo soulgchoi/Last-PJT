@@ -1,24 +1,46 @@
 {% extends 'base.html' %}
-
+{% block nav %}
+{% include 'accounts/_accounts.html' %}
+{% endblock nav %}
 
 {% block body %}
 
 <form class="ui form" method="POST">
     {% csrf_token %}
     <h1 class="ui dividing header">Login</h1>
+    {% if form.errors %}
+        <div class="ui negative message" id="errors">
+            <div class="header">
+                Errors
+            </div>
+                {{ form.non_field_errors }}
+                <ul class="list">
+                    {% for field in form %}
+                        {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                    {% endfor %}
+                </ul>
+            
+        </div>
+    {% endif %}
     <div class="field">
         <label for="form.username">Username</label>
         <input type="text" id="form.username" name="username" class="form-control" required placeholder="Username">
     </div>
     <div class="field">
-        <label>Password</label>
         <div class="field">
-            <label for="form.password" ckass="sr-only"></label>
+            <label for="form.password">Password</label>
             <input type="password" id="form.password" name="password" class="form-control" placeholder="Password">
         </div>
     </div>
     <button class="ui button" type="submit">Submit</button>
 </form>
-    
+
+<div class="ui warning message">
+  <i class="icon help"></i>
+  If you're not a user, <a href="{% url 'accounts:signup' %}">Signup</a> here.
+</div>
+
+
+
 {% endblock body %}
 

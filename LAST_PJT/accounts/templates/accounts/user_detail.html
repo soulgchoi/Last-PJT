@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+{% block nav %}
+{% include 'accounts/_accounts.html' %}
+{% endblock nav %}
 {% block body %}
-<h1 class="ui header">{{ user_info.username }}</h1>
 {% if user != user_info %}
+<h1 class="ui header">{{ user_info.username }}</h1>
     <div class="ui labeled button" tabindex="0">
         <div class="ui grey button">
         <a href="{% url 'accounts:follow' user_info.id %}" style="color: white;"> 
@@ -13,6 +16,17 @@
                 Follow
             {% endif %}
             </a>
+        </div>
+        <a class="ui basic grey left basic label">
+            {{ user_info.follower.count}}
+        </a>
+    </div>
+{% else %}
+<h1 class="ui header">Mypage</h1>
+    <div class="ui labeled button" tabindex="0">
+        <div class="ui grey button">
+            <i class="ui user icon"></i>
+                Follower
         </div>
         <a class="ui basic grey left basic label">
             {{ user_info.follower.count}}

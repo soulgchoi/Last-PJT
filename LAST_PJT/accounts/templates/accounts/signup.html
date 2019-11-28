@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
-
+{% block nav %}
+{% include 'accounts/_accounts.html' %}
+{% endblock nav %}
 {% block body %}
 
 {% comment %} <form class="form-signin" action="" method="post">
@@ -17,7 +18,21 @@
 <form class="ui form" method="POST">
     {% csrf_token %}
     <h1 class="ui dividing header">Signup</h1>
-    <div class="field">
+    {% if form.errors %}
+        <div class="ui negative message" id="errors">
+            <div class="header">
+                Errors
+            </div>
+                {{ form.non_field_errors }}
+                <ul class="list">
+                    {% for field in form %}
+                        {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                    {% endfor %}
+                </ul>
+            
+        </div>
+    {% endif %}
+     <div class="field">
         <label for="form.username">Username</label>
         <input type="text" id="form.username" name="username" class="form-control" required placeholder="Username">
     </div>
@@ -51,8 +66,13 @@
         <label for="form.email">Email</label>
         <input type="text" id="form.email" name="email" class="form-control" placeholder="sample@ssafy.com">
     </div>
-    <button class="ui right floated button" type="submit">Submit</button>
+    <button class="ui button" type="submit">Submit</button>
 </form>
+
+<div class="ui warning message">
+  <i class="icon help"></i>
+  Already signed up? <a href="{% url 'accounts:login' %}">Login</a> here instead.
+</div>
     
 {% endblock body %}
 

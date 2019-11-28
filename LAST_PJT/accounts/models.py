@@ -7,7 +7,6 @@ f = Faker()
 class User(AbstractUser):
     follower = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='following')
 
-
     def __str__(self):
         return self.username
 
@@ -16,5 +15,5 @@ class User(AbstractUser):
         for i in range(n):
             u = cls()
             u.username = f.first_name()
-            u.set_password('1234qwer')
+            u.set_password1('1234qwer')
             u.save()
