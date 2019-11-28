@@ -234,3 +234,8 @@
 - 유저 평점 기반 추천 알고리즘
 - 추천 모자라면 랜덤으로 채워 넣는걸로 변경
 - accounts form 제대로 작동 (user.set_password)
+- rating form 다시 만들기
+
+#### 3. Templates
+
+- sematic ui 적용하여 CSS 완성
