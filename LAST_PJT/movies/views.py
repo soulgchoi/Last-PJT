@@ -44,11 +44,10 @@ def movie_list(request):
                 y1_term = boxoffice.term
             elif int(year) - 5 == term_y:
                 y5_term = boxoffice.term
-            elif int(year) - 10 == term_y:
-                y10_term = boxoffice.term
+
     y1_movies = Boxoffice.objects.filter(term=y1_term)[:5]
     y5_movies = Boxoffice.objects.filter(term=y5_term)[:5]
-    y10_movies = Boxoffice.objects.filter(term=y10_term)[:5]
+
 
     # 추천 알고리즘
     user = request.user  # 유저가
@@ -80,7 +79,7 @@ def movie_list(request):
     return render(request, 'movies/movie_list.html', {
         'y1_movies': y1_movies,
         'y5_movies': y5_movies,
-        'y10_movies': y10_movies,
+
         # 'ran_movies': ran_movies,
         'rcmmd_movies': res,
     })

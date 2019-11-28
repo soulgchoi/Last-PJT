@@ -201,3 +201,36 @@
 
 - CSS 라이브러리 선택 ( tailwind, materialize, semantic, ... )
 - 아무튼 꾸미기
+
+---
+
+### 11.27 day 6
+
+### 프로젝트 진행
+
+#### 1. 데이터
+
+- 화질구지 해결 필요(시간 남으면)
+
+#### 2. Django
+
+- accounts form 새로 만들기 (template 적용하기 위해)
+
+#### 3. Templates
+
+- semantic ui 적용
+- mainpage 나누기
+
+---
+
+### 11.28 day 7
+
+### 프로젝트 진행
+
+#### 1. 데이터
+
+#### 2. Django
+
+- 유저 평점 기반 추천 알고리즘
+- 추천 모자라면 랜덤으로 채워 넣는걸로 변경
+- accounts form 제대로 작동 (user.set_password)

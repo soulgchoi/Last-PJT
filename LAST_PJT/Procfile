@@ -1,0 +1,1 @@
+web: gunicorn LAST_PJT.wsgi --log-file -

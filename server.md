@@ -36,3 +36,45 @@ software deployment 소프트웨어 배치(배포)
 
 ## 배포하자
 
+**IAAS** 
+
+infrastructurn as a service
+
+컴퓨터, 스토리지, 네트워킹, ... 리소스를 제공함
+
+고객이 인프라를 구축 (조립 컴퓨터 같은..)
+
+커스터마이즈 자유로움
+
+app 배포 전까지 할 일이 많음
+
+**PAAS**
+
+platform as a service
+
+컴퓨터, 스토리지, 네트워킹, db 풀 세트
+
+완성된, 풀 옵션
+
+상대적으로 쉽고 빠르다
+
+제한된 기능만 수행할 수 있다
+
+
+
+## Heroku
+
+`pip install django-heroku`
+
+`pip install gunicorn`
+
+`python -V > runtime.txt`
+
+​	`python-3.7.4` 안에 이렇게 바꿔서 저장
+
+헤로쿠 가입&설치
+
+`heroku login`
+
+`heroku create <domainname>`
+
