@@ -92,27 +92,30 @@ def create_rating(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     form = RatingModelForm(request.POST)
     if form.is_valid():
-        rating = form.save(commit=False)
-        rating.movie = movie
-        rating.user = request.user
+        rating = Rating.objects.create(
+            content=form.cleaned_data['content'],
+            score=form.cleaned_data['score'],
+            movie=movie,
+            user=request.user
+        )
         rating.save()
     return redirect('movies:movie_detail', movie_id)
 
 
-@login_required
-@require_http_methods(['GET', 'POST'])
-def edit_rating(request, movie_id, rating_id):
-    rating = get_object_or_404(Rating, id=rating_id)
-    if request.method == 'POST':
-        form = RatingModelForm(request.POST, instance=rating)
-        if form.is_valid():
-            rating = form.save()
-            return redirect('movies:movie_detail', movie_id)
-    else:
-        form = RatingModelForm(instance=rating)
-    return render(request, 'movies/movie_detail.html', {
-        'form': form,
-    })
+# @login_required
+# @require_http_methods(['GET', 'POST'])
+# def edit_rating(request, movie_id, rating_id):
+#     rating = get_object_or_404(Rating, id=rating_id)
+#     if request.method == 'POST':
+#         form = RatingModelForm(request.POST, instance=rating)
+#         if form.is_valid():
+#             rating = form.save()
+#             return redirect('movies:movie_detail', movie_id)
+#     else:
+#         form = RatingModelForm(instance=rating)
+#     return render(request, 'movies/movie_detail.html', {
+#         'form': form,
+#     })
 
 
 @login_required

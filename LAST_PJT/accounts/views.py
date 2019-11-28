@@ -44,12 +44,10 @@ def signup(request):
                 auth_login(request, user)
                 return redirect('accounts:user_list')   
             else:
-                
                 return render(request, 'accounts/signup.html', {
                     'form': form
                 })
     else:
-        
         form = CustomUserCreationForm()
 
     messages = form.errors

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block nav %}
 {% include 'movies/_movies.html' %}
 {% endblock nav %}
@@ -11,27 +11,20 @@
 {% block body %}
 
 <div class="ui very padded segment">
-    {% comment %} <div class="segment"> {% endcomment %}
 
-        <div class="segment">
-            
-
-        </div>
-        <div class="ui two column grid">
-            <div class="ui five wide column">
-                <div class="ui card">
-                    <div class="ui image">
-                        <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" />
-                    </div>
-                    <div class="content">
-                        <a class="header">Team Fu &amp; Hess</a>
-                        <div class="meta">
-                            <span class="date">Created in Sep 2014</span>
-                        </div>
-                    </div>
+    <div class="ui two column grid">
+        <div class="ui five wide column">
+            <div class="ui card">
+                <div class="ui image">
+                    {% if movie.poster_url %}
+                        <img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+                    {% else %}
+                        <img src="{% static 'img/temp3.jpeg' %}" alt="{{ movie.title }}">
+                    {% endif %}
                 </div>
             </div>
-            <div class="ui eleven wide column">
+        </div>
+        <div class="ui eleven wide column">
             <h1 class="header">
                 {{ movie.title }}
                 <div class="ui labeled right floated button" tabindex="0">
@@ -52,44 +45,60 @@
                 </div>
             </h1>
             <div class="ui clearing divider"></div>
-            <p class="card-text">
-                <p>누적 관객수 : {{ movie.audience|intcomma }} | 장르 : {% for genre in genres %}{{ genre.name }}
-                    {% endfor %}</p>
-                <p>{{ movie.opendate }}</p>
-                <p>{{ movie.description_head }}</p>
-                <p>{{ movie.description }}</p>
-            </p>
+            <div class="content">
+                누적 관객수 : {{ movie.audience|intcomma }} | 장르 : {% for genre in genres %}{{ genre.name }}
+                    {% endfor %} | 개봉일 : {{ movie.opendate }}
             </div>
-            
+            <h3 class="ui header">{{ movie.description_head }}</h3>
+            <div class="content">{{ movie.description }}</div>
         </div>
 
-        <div class="ui clearing divider"></div>
+    </div>
 
-        <div class="ui comments">
-            <h3 class="header">{{ movie.rating_set.all.count }} 
-            Comments</h3>
-            {% for rating in movie.rating_set.all %}
-            <div class="comment">
-                <div class="content">
-                    <a class="author">{{ rating.user }}</a>
-                    <div class="text">
-                        {{ rating.content }}
+    <div class="ui clearing divider"></div>
+
+    <div class="ui comments">
+        <h4 class="header">{{ movie.rating_set.all.count }}
+            Comments</h4>
+        {% for rating in movie.rating_set.all %}
+        <div class="comment">
+            <div class="content">
+                <a href="{% url 'accounts:user_detail' rating.user.id %}"class="author">{{ rating.user }}</a>
+                <div class="metadata">
+                    <div class="rating">
+                    <i class="star yellow icon"></i>
+                        {{ rating.score }}
                     </div>
+                    {% if user == rating.user %}
+                        <form action="{% url 'movies:delete_rating' movie.id rating.id %}" method="POST">
+                            {% csrf_token %}
+                            <button style="padding:0; border:none; background:none;"><i class="ui trash alternate outline icon"></i></button>
+                        </form>
+                    {% endif %}
+                </div>
+                <div class="text">
+                    {{ rating.content }}
                 </div>
             </div>
-            {% endfor %}
         </div>
-        <div class="ui divider"></div>
-        {% if request.user.is_authenticated %}
-        <form class="ui form" method="POST">
-            {% csrf_token %}
-            <div class="field">
-                <textarea></textarea>
-            </div>
-            <div class="ui blue labeled submit icon button">
-                <i class="icon edit"></i>
-            </div>
-        </form>
-        {% endif %}
+        {% endfor %}
     </div>
+    <div class="ui divider"></div>
+    {% if request.user.is_authenticated %}
+    <form class="ui form" method="POST" action="{% url 'movies:create_rating' movie.id %}">
+        {% csrf_token %}
+        <div class="fields">
+            <div class="two wide field">
+                <label for="form.score"></label>
+                <input type="number" id="form.score" name="score" class="form-control" min="0" max="10" required placeholder="Score">
+            </div>
+            <div class="twelve wide field">
+                <label for="form.content"></label>
+                <input type="text" id="form.content" name="content" class="form-control" required placeholder="Comment">
+            </div>    
+            <button class="ui button" type="submit">create</button>
+        </div>
+    </form>
+    {% endif %}
+
     {% endblock body %}
