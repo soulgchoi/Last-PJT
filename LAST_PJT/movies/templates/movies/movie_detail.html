@@ -62,7 +62,7 @@
         {% for rating in movie.rating_set.all %}
         <div class="comment">
             <div class="content">
-                <a href="{% url 'accounts:user_detail' rating.user.id %}"class="author">{{ rating.user }}</a>
+                <a href="{% url 'accounts:user_detail' rating.user.id %}" class="author">{{ rating.user }}</a>
                 <div class="metadata">
                     <div class="rating">
                     <i class="star yellow icon"></i>

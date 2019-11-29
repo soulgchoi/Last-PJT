@@ -36,15 +36,29 @@
 <hr>
 <h2 class="ui header">Like Movies</h5>
 {% for movie in user_info.like_movies.all  %}
-    <li>
-        <a style="text-decoration: none" href="{% url 'movies:movie_detail' movie.id %}">{{ movie.title }}
-        </a>
-    </li>
+    <div class="item">
+        <div class="content">
+            <div class="header"></div>
+            <i class="ui film icon"></i>
+            <a style="text-decoration: none; color: #2E2E2E;" href="{% url 'movies:movie_detail' movie.id %}">
+                {{ movie.title }}
+            </a>
+        </div>
+    </div>
 {% endfor %}
 <hr>
-<h2 class="ui header">Reviews</h5>
-{% for review in reviews %}
-<li>{{ review.movie.title}}: {{ review.content }} ({{ review.score }})</li></a>
-{% endfor %}
-
+<h2 class="ui header">Comments</h5>
+{% for rating in user_info.rating_set.all %}
+        <div class="comment">
+            <div class="content">
+                <a href="{% url 'movies:movie_detail' rating.movie.id %}" class="ui small header">{{ rating.movie.title }}</a>
+                <div class="text">
+                    {{ rating.score }}
+                    <i class="star yellow icon"></i>
+                        
+                        {{ rating.content }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
 {% endblock body %}

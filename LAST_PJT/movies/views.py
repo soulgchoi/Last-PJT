@@ -73,14 +73,9 @@ def movie_list(request):
         rand_rcmm = random.sample(ids, 10)  # 아니면 그 중에 열개
         res = Movie.objects.filter(id__in=rand_rcmm)
 
-    # 랜덤 출력
-
-
     return render(request, 'movies/movie_list.html', {
         'y1_movies': y1_movies,
         'y5_movies': y5_movies,
-
-        # 'ran_movies': ran_movies,
         'rcmmd_movies': res,
     })
 
