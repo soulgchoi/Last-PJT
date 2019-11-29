@@ -4,17 +4,17 @@ import csv
 from datetime import datetime
 
 class Genre(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.TextField()
 
 
 class Movie(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.TextField()
     opendate = models.DateField()
     audience = models.IntegerField()
     poster_url = models.TextField()
     description_head = models.TextField()
     description = models.TextField()
-    codes = models.CharField(max_length=10)
+    codes = models.TextField()
     genres = models.ManyToManyField(Genre, related_name='movie_genre')
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
 
@@ -40,7 +40,7 @@ class Movie(models.Model):
 
 
 class Boxoffice(models.Model):
-    term = models.CharField(max_length=17)
+    term = models.TextField()
     rank = models.IntegerField()
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
@@ -57,7 +57,7 @@ class Boxoffice(models.Model):
 
 
 class Rating(models.Model):
-    content = models.CharField(max_length=140)
+    content = models.TextField()
     score = models.IntegerField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)

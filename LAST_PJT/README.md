@@ -52,7 +52,7 @@ class Boxoffice(models.Model):
 - 접속 날짜 기준 박스오피스 정보
 
   ``````python
-  ![lastpjt2](C:\Users\student\Last_PJT_backup\LAST_PJT\pjt_images\lastpjt2.JPG)from datetime import datetime  
+  from datetime import datetime  
   def movie_list(request):
   	boxoffices = Boxoffice.objects.all()  # boxoffice 에 저장된 objects를 모두 가져온다.
       now = datetime.now()  # datetime 모듈을 사용하여 현재 시간을 받는다.
@@ -80,7 +80,7 @@ class Boxoffice(models.Model):
 - 평점 기반 추천 알고리즘
 
   ``````python
-  ![lastpjt3](C:\Users\student\Last_PJT_backup\LAST_PJT\pjt_images\lastpjt3.JPG)def movie_list(request):
+  def movie_list(request):
   	user = request.user  # 유저가
       recommend_movies = ''
       rcmmd_movies = []
@@ -208,3 +208,4 @@ class Boxoffice(models.Model):
 
 ### 4. 배포 서버 URL
 
+https://pacific-headland-13749.herokuapp.com/
