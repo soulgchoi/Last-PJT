@@ -1,6 +1,6 @@
 
 
-![lastpjt1](.\pjt_images\lastpjt1.JPG)
+![lastpjt1](./image/lastpjt1.JPG)
 
 
 
@@ -73,7 +73,7 @@ class Boxoffice(models.Model):
       y5_movies = Boxoffice.objects.filter(term=y5_term)[:5]
   ``````
 
-  ![lastpjt2](.\pjt_images\lastpjt2.JPG)
+  ![lastpjt2](./image/lastpjt2.JPG)
 
   - 위와 같은 모습으로 출력된다.
 
@@ -106,7 +106,7 @@ class Boxoffice(models.Model):
           res = Movie.objects.filter(id__in=rand_rcmm)
   ``````
 
-  ![lastpjt3](.\pjt_images\lastpjt3.JPG)
+  ![lastpjt3](./image/lastpjt3.JPG)
 
   - 위와 같은 모습으로 출력된다.
 
@@ -116,7 +116,7 @@ class Boxoffice(models.Model):
 
 #### 2. 영화 상세정보
 
-​	![lastpjt4](.\pjt_images\lastpjt4.JPG)
+​	![lastpjt4](./image/lastpjt4.JPG)
 
 - like / dislike 토글 버튼으로 `like_movies` 를 추가할 수 있다. 
   - 이를 기반으로 추천 알고리즘이 동작한다.
@@ -126,7 +126,7 @@ class Boxoffice(models.Model):
 
 #### 3. 유저 상세정보
 
-​	![lastpjt5](.\pjt_images\lastpjt5.JPG)
+​	![lastpjt5](./image/lastpjt5.JPG)
 
 - 다른 유저를 팔로잉 할 수 있다.
 - 유저가 남긴 평점과 영화 좋아요 정보가 출력된다.
@@ -198,11 +198,11 @@ class Boxoffice(models.Model):
 
   출력되는 모습은 아래와 같다.
 
-  ![lastpjt6](.\pjt_images\lastpjt6.JPG)
+  ![lastpjt6](./image/lastpjt6.JPG)
 
   - 로그인이 되지 않았을 때는 메인페이지로 연결된다.
 
-  ![lastpjt7](.\pjt_images\lastpjt7.JPG)
+  ![lastpjt7](./image/lastpjt7.JPG)
 
 ---
 
